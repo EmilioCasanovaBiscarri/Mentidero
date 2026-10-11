@@ -92,7 +92,7 @@ body::before {
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-template-areas:
-    "help . stats"
+    "stats . help"
     "title title title";
   align-items: center;
   padding-bottom: 6px;
@@ -143,20 +143,17 @@ body::before {
   place-items: center;
 }
 .icon-btn:hover { color: var(--lacre); border-color: var(--lacre); }
-
-.text-btn {
-  height: 34px;
-  padding: 0 14px;
-  border-radius: 999px;
-  border: 1px solid var(--rule);
-  background: transparent;
-  color: var(--ink-soft);
-  font-family: var(--font-display);
-  font-size: 1rem;
-  letter-spacing: 0.04em;
-  cursor: pointer;
+/* Estadísticas: el mismo icono de barras que en Toponimia, sin borde. */
+.icon-btn--plain { border-color: transparent; }
+.icon-btn--plain:hover { border-color: transparent; }
+.icon-btn svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
 }
-.text-btn:hover { color: var(--lacre); border-color: var(--lacre); }
 
 main {
   flex: 1;
@@ -246,7 +243,6 @@ main {
 
 .btn:focus-visible,
 .icon-btn:focus-visible,
-.text-btn:focus-visible,
 .option:focus-visible {
   outline: 2px solid var(--lacre);
   outline-offset: 2px;
