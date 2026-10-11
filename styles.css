@@ -90,18 +90,21 @@ body::before {
 
 .masthead {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-areas:
-    "stats . help"
-    "title title title";
-  align-items: center;
+  /* Estadísticas, logo con el nombre y ayuda en la misma fila; los botones, a la altura del nombre. */
+  grid-template-columns: 34px 1fr 34px;
+  grid-template-areas: "stats title help";
+  column-gap: 8px;
+  align-items: start;
   padding-bottom: 6px;
   border-bottom: 3px double var(--rule);
 }
 
-.masthead__title { grid-area: title; text-align: center; margin-top: 2px; }
+.masthead__title { grid-area: title; text-align: center; margin-top: 2px; min-width: 0; }
 #btn-help { grid-area: help; }
 #btn-stats { grid-area: stats; }
+/* Centrados en la línea del nombre: 2 px de margen más (alto del nombre − 34 px) / 2. */
+#btn-help,
+#btn-stats { margin-top: calc(2px + (clamp(2rem, 9vw, 2.6rem) - 34px) / 2); }
 
 .masthead h1 {
   margin: 0;
