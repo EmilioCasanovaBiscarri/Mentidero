@@ -157,7 +157,7 @@
   function shareText(day, results) {
     var marks = results.map(function (r) { return r ? '▰' : '▱'; }).join('');
     var score = results.filter(Boolean).length;
-    return 'Mentidero nº ' + day + ' ' + marks + ' ' + score + '/' + results.length + ' aciertos\njoseleking.github.io/Mentidero';
+    return 'Mentidero nº ' + day + ' ' + marks + ' ' + score + '/' + results.length + ' aciertos\nemiliocasanovabiscarri.github.io/Mentidero';
   }
 
   function msUntilNextDay(now) {
@@ -434,7 +434,7 @@
       statsHTML() +
       '<div class="stack">' +
       '<button class="btn" id="btn-share" type="button">Compartir</button>' +
-      '<a class="btn btn--ghost btn--enlace" data-almanaque-volver hidden href="https://joseleking.github.io/Almanaque/">☜ Regresar al Almanaque</a>' +
+      '<a class="btn btn--ghost btn--enlace" data-almanaque-volver hidden href="https://emiliocasanovabiscarri.github.io/Almanaque/">☜ Regresar al Almanaque</a>' +
       '</div>' +
       '<p class="countdown">Próximo pliego en ' +
       '<time id="countdown">--:--:--</time></p>' +

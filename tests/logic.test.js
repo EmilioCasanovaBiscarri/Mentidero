@@ -122,7 +122,7 @@ test('persistencia en almacenamiento', () => {
 
 test('texto para compartir: marcas sin revelar respuestas', () => {
   const t = L.shareText(4, [true, false, true]);
-  assert.equal(t, 'Mentidero nº 4 ▰▱▰ 2/3 aciertos\njoseleking.github.io/Mentidero');
+  assert.equal(t, 'Mentidero nº 4 ▰▱▰ 2/3 aciertos\nemiliocasanovabiscarri.github.io/Mentidero');
   for (const dia of data.dias) for (const p of dia.palabras) assert.ok(!t.includes(p.palabra));
 });
 
