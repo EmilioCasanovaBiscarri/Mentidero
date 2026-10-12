@@ -289,10 +289,10 @@
     var pct = s.played ? Math.round(s.correct / (s.played * CONFIG.WORDS_PER_DAY) * 100) : 0;
     return '' +
       '<div class="stats">' +
-      '<div><b>' + s.played + '</b><span>Días jugados</span></div>' +
-      '<div><b>' + currentStreak(state, today) + '</b><span>Racha actual</span></div>' +
-      '<div><b>' + s.maxStreak + '</b><span>Mejor racha</span></div>' +
+      '<div><b>' + s.played + '</b><span>Días</span></div>' +
       '<div><b>' + pct + '%</b><span>Aciertos</span></div>' +
+      '<div><b>' + currentStreak(state, today) + '</b><span>Racha</span></div>' +
+      '<div><b>' + s.maxStreak + '</b><span>Mejor racha</span></div>' +
       '</div>';
   }
 
@@ -397,6 +397,9 @@
     }, 650);
   }
 
+  // Bocadillo de los rumores del mentidero: marca de la ficha final.
+  var BOCADILLO = 'M4.5 3.5h15a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-5 4v-4h-2a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2Z';
+
   function screenSummary() {
     var game = getGame(state, today);
     var day = contentForDay(words, today);
@@ -407,27 +410,33 @@
       'Buen oído: casi nadie te la cuela.',
       '¡Ni un bulo te ha pasado! Digno de la Real Academia.'
     ];
-    var emoji = game.results.map(function (r) { return r ? '🟢' : '🔴'; }).join('');
+    // Un bocadillo por palabra: lleno si se dio con la verdad, hueco si coló el bulo.
+    var bocadillos = game.results.map(function (r) {
+      return '<svg class="' + (r ? 'bien' : 'mal') + '" viewBox="0 0 24 24" aria-hidden="true"><path d="' + BOCADILLO + '"/></svg>';
+    }).join('');
 
+    // Pantalla final, igual en todos los juegos del Almanaque: ficha con el resultado, una
+    // línea por palabra, estadísticas y botones, que se ven sin desplazarse.
     render(
-      '<section class="screen">' +
-      '<p class="kicker">Pliego n.º ' + today + ' · resultado</p>' +
+      '<section class="screen screen--final" aria-label="Resultado de hoy">' +
       '<div class="score">' +
-      '<div class="score__big">' + score + '/' + CONFIG.WORDS_PER_DAY + '</div>' +
-      '<p class="score__emoji" aria-hidden="true">' + emoji + '</p>' +
+      '<p class="score__marks" role="img" aria-label="' + score + (score === 1 ? ' acierto' : ' aciertos') + ' de ' + CONFIG.WORDS_PER_DAY + '">' + bocadillos + '</p>' +
+      '<h2 class="score__big">' + score + ' <small>de ' + CONFIG.WORDS_PER_DAY + '</small></h2>' +
       '<p class="score__phrase">' + phrases[score] + '</p>' +
       '</div>' +
-      '<ul class="recap">' + day.palabras.map(function (p, i) {
+      '<ol class="recap recap--final" aria-label="Toca una palabra para releer su definición">' + day.palabras.map(function (p, i) {
         var ok = game.results[i];
-        return '<li><span class="mark ' + (ok ? '' : 'mark--wrong') + '">' + (ok ? '✔' : '✘') + '</span> ' +
-          '<b>' + esc(p.palabra) + '</b>: ' + esc(p.verdadera) + '</li>';
-      }).join('') + '</ul>' +
+        return '<li><details><summary>' +
+          '<span class="mark ' + (ok ? '' : 'mark--wrong') + '" aria-label="' + (ok ? 'Acierto' : 'Fallo') + '">' + (ok ? '✔' : '✘') + '</span>' +
+          '<b>' + esc(p.palabra) + '</b></summary>' +
+          '<p class="recap__def">' + esc(p.verdadera) + '</p></details></li>';
+      }).join('') + '</ol>' +
       statsHTML() +
       '<div class="stack">' +
-      '<button class="btn" id="btn-share" type="button">Compartir resultado</button>' +
+      '<button class="btn" id="btn-share" type="button">Compartir</button>' +
       '<a class="btn btn--ghost btn--enlace" data-almanaque-volver hidden href="https://joseleking.github.io/Almanaque/">☜ Regresar al Almanaque</a>' +
       '</div>' +
-      '<p class="countdown">Próximo pliego en' +
+      '<p class="countdown">Próximo pliego en ' +
       '<time id="countdown">--:--:--</time></p>' +
       '</section>'
     );

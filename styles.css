@@ -415,26 +415,42 @@ main {
   to { opacity: 1; transform: none; }
 }
 
-/* ---------- Resumen ---------- */
+/* ---------- Resumen ----------
+   Igual en todos los juegos del Almanaque: ficha con el resultado, una línea por palabra,
+   estadísticas y botones. Todo cabe en el móvil sin desplazarse hasta los botones. */
 
 .score {
+  margin: 0;
+  padding: 10px 16px 12px;
+  border: 1px solid var(--rule);
+  outline: 1px solid var(--rule);
+  outline-offset: -5px;
+  border-radius: 2px;
+  background: var(--card);
   text-align: center;
-  margin: 6px 0 8px;
 }
+.score__marks {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 2px 0 0;
+}
+.score__marks svg { width: 26px; height: 26px; }
+.score__marks .bien { fill: var(--lacre); }
+.score__marks .mal { fill: none; stroke: var(--ink-faint); stroke-width: 1.4; stroke-linejoin: round; }
 .score__big {
+  margin: 2px 0 0;
   font-family: var(--font-display);
-  font-size: 3.4rem;
-  line-height: 1;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 1.05;
   color: var(--lacre);
 }
-.score__emoji {
-  font-size: 1.8rem;
-  letter-spacing: 0.2em;
-  margin: 6px 0 0;
-}
+.score__big small { font-size: 0.55em; color: var(--ink-soft); }
 .score__phrase {
-  margin: 6px 0 0;
+  margin: 2px 0 0;
   font-style: italic;
+  font-size: 1.1rem;
   color: var(--ink-soft);
 }
 
@@ -457,6 +473,31 @@ main {
 }
 .recap .mark { color: var(--lacre); }
 .recap .mark--wrong { color: var(--ink-faint); }
+
+.recap--final { margin: 8px 0 0; border-top: 0; }
+.recap--final li { padding: 0; }
+.recap--final summary {
+  display: grid;
+  grid-template-columns: 24px 1fr 14px;
+  align-items: baseline;
+  gap: 8px;
+  min-height: 42px;
+  padding: 7px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.recap--final summary::-webkit-details-marker { display: none; }
+.recap--final summary::after {
+  content: "›";
+  color: var(--ink-faint);
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+.recap--final details[open] summary::after { transform: rotate(90deg); }
+.recap--final .mark { text-align: center; font-weight: 600; }
+.recap--final b { font-size: 1.25rem; }
+.recap__def { margin: 0; padding: 0 0 10px 32px; font-size: 1.05rem; color: var(--ink-soft); }
 
 .stats {
   display: grid;
@@ -484,6 +525,20 @@ main {
   line-height: 1.15;
 }
 
+/* En la pantalla final, las estadísticas van en una franja entre filetes dobles. */
+.screen--final .stats {
+  gap: 0;
+  margin: 12px 0 0;
+  padding: 6px 0;
+  border-top: 3px double var(--rule);
+  border-bottom: 3px double var(--rule);
+}
+.screen--final .stats div { padding: 0; border: 0; }
+.screen--final .stats b { font-size: 1.35rem; }
+.screen--final .stats span { font-size: 0.8rem; white-space: nowrap; }
+.screen--final .stack { gap: 8px; margin-top: 12px; }
+.screen--final .btn { min-height: 48px; padding: 8px 18px; }
+
 .countdown {
   text-align: center;
   margin: 14px 0 0;
@@ -491,12 +546,19 @@ main {
   font-size: 0.95rem;
 }
 .countdown time {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.7rem;
-  color: var(--ink);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* En pantallas bajas (iPhone SE, Android pequeños) las estadísticas bajan bajo los botones,
+   para que Compartir, Siguiente juego y Regresar se vean sin desplazarse. */
+@media (max-height: 660px) {
+  .screen--final { display: flex; flex-direction: column; }
+  .screen--final > .stats,
+  .screen--final > .countdown { order: 1; }
+  .score { padding: 8px 16px 10px; }
+  .recap--final summary { min-height: 40px; padding: 6px 0; }
 }
 
 .stack { display: grid; gap: 10px; }
