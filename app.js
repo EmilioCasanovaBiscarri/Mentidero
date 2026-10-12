@@ -524,7 +524,7 @@
   function route() {
     if (today < 1) return screenNotStarted();
 
-    setSub('Pliego n.º ' + today + ' · ' + longDate(new Date()));
+    setSub('Gaceta de verdades y bulos');
 
     if (!state.introSeen) return screenIntro();
     var game = getGame(state, today);
