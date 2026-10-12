@@ -106,3 +106,7 @@ No requiere ningún paso de compilación. Las fuentes se cargan desde Google Fon
 Todo se guarda en el `localStorage` del navegador (clave `mentidero:v1`):
 partidas por día, días jugados, racha actual y máxima, aciertos y distribución
 de resultados. No se envía nada a ningún servidor.
+
+## Derechos de autor
+
+© 2026 Emilio Casanova Biscarri. Todos los derechos reservados. El código, los textos y los diseños de este repositorio no pueden copiarse ni reutilizarse sin permiso.
