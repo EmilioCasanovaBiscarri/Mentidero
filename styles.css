@@ -683,3 +683,13 @@ main {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Las cifras de IM Fell son de estilo antiguo (el 1 parece una I): los números de la ficha
+   final y de las estadísticas van en EB Garamond, con cifras modernas. */
+.score__big,
+.stats b {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-variant-numeric: lining-nums;
+}
+.score__big small { font-family: var(--font-display); font-weight: 400; }
