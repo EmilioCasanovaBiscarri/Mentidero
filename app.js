@@ -243,7 +243,6 @@
     else document.addEventListener('DOMContentLoaded', avisar, { once: true });
   }
 
-  function setSub(text) { document.getElementById('masthead-sub').textContent = text; }
 
   function toast(msg) {
     toastEl.textContent = msg;
@@ -311,7 +310,6 @@
   // ---------- Pantallas ----------
 
   function screenIntro() {
-    setSub('Gaceta de verdades y bulos');
     render(
       '<section class="screen">' +
       '<p class="kicker">Aviso al lector</p>' +
@@ -441,7 +439,6 @@
   }
 
   function screenNotStarted() {
-    setSub('Gaceta de verdades y bulos');
     var start = parseISODate(CONFIG.START_DATE);
     render(
       '<section class="screen screen--center">' +
@@ -524,7 +521,6 @@
   function route() {
     if (today < 1) return screenNotStarted();
 
-    setSub('Gaceta de verdades y bulos');
 
     if (!state.introSeen) return screenIntro();
     var game = getGame(state, today);
