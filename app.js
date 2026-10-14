@@ -340,7 +340,7 @@
       '<div class="progress" aria-label="Palabra ' + (index + 1) + ' de ' + CONFIG.WORDS_PER_DAY + '">' + dots + '</div>' +
       '<div class="word"><h2>' + esc(entry.palabra) + '</h2>' +
       '<p class="word__cat">' + esc(entry.categoria || '') + '</p></div>' +
-      '<p class="prompt">¿Cuál es la verdad y cuáles los bulos?</p>' +
+      '<p class="prompt">¿Cuál de las tres es la verdad?</p>' +
       '<ul class="options">' + options.map(function (o, k) {
         return '<li><button class="option" type="button" data-k="' + k + '">' +
           '<span class="option__letter">' + LETTERS[k] + '</span>' +
